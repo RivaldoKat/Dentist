@@ -1,7 +1,41 @@
 from django.shortcuts import render
 from django.core.mail import send_mail
+from django.http import HttpResponseRedirect, FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter 
 
 # Create your views here.
+
+# Generate a PDF file 
+def letter_pdf(request):
+    # Create Bytestream buffer
+    buf = io.BytesIO()
+    # Create canvas 
+    canva = canvas.Canvas(buf, pagesize = letter, bottomup=0)
+    # Create text object 
+    textObject = canva.beginText()
+    textObject.setTextOrigin(inch,inch)
+    textObject.setFont("Helvetica", 14)
+
+    # Add some lines of text  
+    lines = [
+        appointment()
+    ]
+
+    # Loop 
+    for line in lines:
+        textObject.textLine(line)
+
+    # Finish up 
+    canva.drawText(textObject)
+    canva.showPage()
+    canva.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='letter.pdf')
+
 def home(request):
     return render(request, 'home.html', {})
 

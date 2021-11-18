@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .pdf import *
 
 
 urlpatterns = [
@@ -8,5 +9,6 @@ urlpatterns = [
     path('about.html', views.about,name='about'),
     path('pricing.html', views.pricing,name='pricing'),
     path('service.html', views.service,name='service'),
-    path('appointment.html', views.appointment,name='appointment')
+    path('appointment.html', views.appointment,name='appointment'),
+    path('pdf', client, name='pdf')
 ]
