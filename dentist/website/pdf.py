@@ -2,7 +2,7 @@ from io import BytesIO
 from django.shortcuts import render
 from django.template.loader import get_template
 from django.http import HttpResponse
-from xhtml2pdf import pisa 
+
 from .views import appointment
 
 def render_to_pdf(template_src, context_dic={}):
