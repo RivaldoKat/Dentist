@@ -3,6 +3,7 @@ from . import views
 from .pdf import *
 
 
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('contact.html', views.contact,name='contact'),
